@@ -1,0 +1,21 @@
+.table {
+  min-width: 100%;
+
+  th {
+    text-align: left;
+  }
+  
+  td,
+  th {
+    padding: 10px;
+  }
+
+  tr:not(:nth-child(1)) {
+    transition: 0.4s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: #0001;
+    }
+  }
+}

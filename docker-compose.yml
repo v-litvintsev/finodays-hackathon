@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  strapi:
+    image: naskio/strapi:4.11.0
+    container_name: strapi
+    platform: linux/x86_64
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_NAME: strapi
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi
+      STRAPI_DISABLE_UPDATE_NOTIFICATION: true
+    volumes:
+      - ./strapi:/srv/app
+    ports:
+      - 1337:1337
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+      POSTGRES_DB: strapi
+    ports:
+      - 5432:5432
