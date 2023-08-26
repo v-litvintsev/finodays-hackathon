@@ -1,8 +1,23 @@
-version: '3'
+version: "3"
 
 services:
+  client:
+    container_name: client
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+    ports:
+      - 3001:3001
+
   strapi:
-    image: naskio/strapi:4.11.0
     container_name: strapi
     platform: linux/x86_64
     environment:
@@ -12,7 +27,9 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: strapi
       DATABASE_PASSWORD: strapi
-      STRAPI_DISABLE_UPDATE_NOTIFICATION: true
+    build:
+      context: ./strapi
+      dockerfile: ./Dockerfile
     volumes:
       - ./strapi:/srv/app
     ports:
